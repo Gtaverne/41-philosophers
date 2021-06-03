@@ -1,8 +1,9 @@
 NAME	=	philo_one
 CC		=	clang
 HEADER	=	includes/philo_one.h
-OBJDIR	=	object
-SRC		=	srcs/main.c
+OBJDIR	=	obj
+SRC		=	srcs/main.c \
+			srcs/utils.c
 
 OBJ 	=	$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
