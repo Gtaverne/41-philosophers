@@ -2,8 +2,10 @@ NAME	=	philo
 CC		=	clang
 HEADER	=	includes/philo.h
 OBJDIR	=	obj
-SRC		=	srcs/main.c \
-			srcs/utils.c
+SRC		=	srcs/philo.c \
+			srcs/timeandutils.c \
+			srcs/initiators.c \
+			srcs/threader.c
 
 OBJ 	=	$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address

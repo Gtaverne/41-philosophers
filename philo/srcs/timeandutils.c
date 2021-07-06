@@ -12,9 +12,7 @@ void	ft_gettime_init(t_a *a)
 	struct timeval t;
 	
 	gettimeofday(&t, NULL);
-	a->sec_start = t.tv_sec;
-	a->usec_start = t.tv_usec;
-	a->start_date = a->sec_start * 1000 + a->usec_start / 1000;
+	a->start_date = t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
 int		ft_gettime_sincestart(t_a *a)
@@ -23,7 +21,7 @@ int		ft_gettime_sincestart(t_a *a)
 	int				res;
 
 	gettimeofday(&t, NULL);
-	res = t.tv_sec * 1000 + t.tv_usec / 1000 - a->sec_start;
+	res = t.tv_sec * 1000 + t.tv_usec / 1000 - a->start_date;
 	return (res);
 }
 
