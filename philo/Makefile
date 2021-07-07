@@ -18,6 +18,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJDIR)/%.o: %.c
+	@mkdir -p obj/srcs
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -5,7 +5,7 @@ void	ft_cleanexit(t_a *a, char *str)
 	int	i;
 
 	i = 0;
-	printf("Exit : %s\n", str);
+	printf("\nExit : %s\n", str);
 	if (str[0] == 'e' && str[1] == 'n' && str[2] == 'd' && VERBOSE)
 	{
 		while (i < a->n_of_philo)
@@ -44,7 +44,7 @@ void	ft_waitfor(t_a *a, int n_ms)
 	current = start;
 	while (current < start + n_ms)
 	{
-		usleep(50);
+		usleep(100);
 		current = ft_gettime_sincestart(a);
 	}
 }
@@ -52,7 +52,7 @@ void	ft_waitfor(t_a *a, int n_ms)
 int	ft_atoi(const char *nptr, t_a *a)
 {
 	int		i;
-	int		r;
+	long int		r;
 
 	i = 0;
 	r = 0;
@@ -66,5 +66,5 @@ int	ft_atoi(const char *nptr, t_a *a)
 	}
 	if (r >= 3600000)
 		ft_cleanexit(a, "Valeur enorme, on va attendre des heures...");
-	return (r);
+	return ((int)r);
 }

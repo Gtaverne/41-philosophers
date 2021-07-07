@@ -31,7 +31,6 @@ typedef struct s_a {
 	int					limitmeal;
 	int					deadphilo;
 	long unsigned int	start_date;
-	int					error;
 	t_philo				philo[200];
 	pthread_mutex_t		m_stop;
 	pthread_mutex_t		m_write;

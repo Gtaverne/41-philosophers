@@ -50,11 +50,12 @@ int	main(int ac, char **av)
 	{
 		ft_init_philo(&a, i);
 		pthread_create(&thread[i], NULL, ft_threader, &a.philo[i]);
-		i = i + 2;
+		i += 2;
+		usleep(1);
 		if (i >= a.n_of_philo && i % 2 == 0)
 		{
 			i = 1;
-			usleep(250);
+			usleep(300);
 		}
 	}
 	while (!a.deadphilo)
