@@ -8,7 +8,7 @@ SRC		=	srcs/philo.c \
 			srcs/threader.c
 
 OBJ 	=	$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror #-g3 -fsanitize=thread
 
 all: $(NAME)
 

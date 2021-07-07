@@ -2,20 +2,30 @@
 
 void	ft_cleanexit(t_a *a, char *str)
 {
+	int	i;
+
+	i = 0;
 	printf("Exit : %s\n", str);
-	a->n_of_philo = 0;
+	if (str[0] == 'e' && str[1] == 'n' && str[2] == 'd' && VERBOSE)
+	{
+		while (i < a->n_of_philo)
+		{
+			printf("Philosopher %d ate %d meals\n", i + 1, a->philo[i].cycles);
+			i++;
+		}
+	}
 	exit(0);
 }
 
 void	ft_gettime_init(t_a *a)
 {
-	struct timeval t;
-	
+	struct timeval	t;
+
 	gettimeofday(&t, NULL);
 	a->start_date = t.tv_sec * 1000 + t.tv_usec / 1000;
 }
 
-int		ft_gettime_sincestart(t_a *a)
+int	ft_gettime_sincestart(t_a *a)
 {
 	struct timeval	t;
 	int				res;

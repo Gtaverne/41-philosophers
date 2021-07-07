@@ -14,8 +14,8 @@ void	ft_parser(t_a *a, int ac, char **av)
 	if (ac < 5)
 	{
 		printf("Il manque des arguments :\n- N of philo\n\
-- Time to die\n- Time to eat\n- Time to sleep\n[- Time each \
-philosopher must eat]\n");
+- Time to die\n- Time to eat\n- Time to sleep\n- Time each \
+philosopher must eat [option]\n");
 		exit(1);
 	}
 	a->n_of_philo = ft_atoi(av[1], a);
@@ -33,16 +33,16 @@ philosopher must eat]\n");
 		a->n_meals = -1;
 	}
 	if (ac > 6)
-		ft_cleanexit(a, "Too many arguments");
+		ft_cleanexit(a, ": too many arguments");
 	ft_sanitycheck(a);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_a			a;
 	pthread_t	thread[200];
 	int			i;
-	
+
 	ft_parser(&a, ac, av);
 	i = 0;
 	ft_initiator(&a);
@@ -62,5 +62,6 @@ int main(int ac, char **av)
 	i = 0;
 	while (i < a.n_of_philo)
 		pthread_join(thread[i++], NULL);
+	ft_cleanexit(&a, "end");
 	return (0);
 }

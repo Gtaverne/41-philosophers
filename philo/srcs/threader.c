@@ -7,7 +7,7 @@ void	ft_dialogue(t_a *a, t_philo *philo, char *str)
 	pthread_mutex_lock(&a->m_stop);
 	alive = a->deadphilo;
 	pthread_mutex_unlock(&a->m_stop);
-	if (alive)
+	if (alive == 1)
 		return ;
 	pthread_mutex_lock(&a->m_write);
 	printf("%dms %d %s\n", ft_gettime_sincestart(a), philo->id + 1, str);
@@ -44,15 +44,11 @@ void	*ft_threader(void *arg)
 
 	philo = (t_philo *)arg;
 	a = (t_a *)philo->a_dress;
-	philo->cycles = 0;
 	philo->rip = 0;
 	while (!philo->rip && (philo->cycles < a->n_meals || a->limitmeal == 0))
 		ft_actionlist(a, philo);
-	if (a->deadphilo == 0 || a->deadphilo == 2)
-	{
-		ft_dialogue(a, philo, "IS DONE WITH THIS WILL DO BETTER THINGS WITH HIS LIFE");
+	if (a->deadphilo == 0)
 		a->deadphilo = 2;
-	}
 	return (NULL);
 }
 
@@ -75,8 +71,6 @@ void	ft_healthcheck(t_a *a)
 			printf("%dms %d is dead\n", ft_gettime_sincestart(a), i + 1);
 			pthread_mutex_unlock(&a->m_write);
 			pthread_mutex_lock(&a->m_stop);
-			/*if (a->deadphilo == 2)
-				a->deadphilo = 3;*/
 			if (a->deadphilo == 0)
 				a->deadphilo = 1;
 			pthread_mutex_unlock(&a->m_stop);

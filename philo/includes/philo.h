@@ -8,6 +8,8 @@
 # include <pthread.h>
 # include <string.h>
 
+# define VERBOSE 1
+
 typedef struct s_philo {
 	int				id;
 	int				last_meal;
@@ -49,7 +51,5 @@ void	ft_init_philo(t_a *a, int i);
 //threader
 void	*ft_threader(void *arg);
 void	ft_healthcheck(t_a *a);
-
-
 
 #endif
