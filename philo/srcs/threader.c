@@ -17,14 +17,13 @@ void	ft_dialogue(t_a *a, t_philo *philo, char *str)
 void	ft_actionlist(t_a *a, t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_frk);
-	ft_dialogue(a, philo, "has taken a lfork");
+	ft_dialogue(a, philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_frk);
-	ft_dialogue(a, philo, "has taken a rfork");
+	ft_dialogue(a, philo, "has taken a fork");
 	pthread_mutex_lock(philo->eating);
 	philo->last_meal = ft_gettime_sincestart(a);
 	ft_dialogue(a, philo, "is eating");
 	ft_waitfor(a, a->t_to_eat);
-	ft_dialogue(a, philo, "is done eating");
 	pthread_mutex_unlock(philo->left_frk);
 	pthread_mutex_unlock(philo->right_frk);
 	pthread_mutex_unlock(philo->eating);
