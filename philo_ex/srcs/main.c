@@ -1,14 +1,5 @@
 #include "../includes/philo.h"
 
-void	ft_sanitycheck(t_a *a)
-{
-	if (a->n_of_philo > 200)
-		ft_cleanexit(a, "Error: too many philosophers\n");
-	if (a->n_of_philo < 1 || a->t_to_die < 1 || a->t_to_eat < 1 \
-	|| a->t_to_sleep < 1 || (a->n_meals < 1 && a->limitmeal == 1))
-		ft_cleanexit(a, "Error: check arguments\n");
-}
-
 void	ft_parser(t_a *a, int ac, char **av)
 {
 	if (ac < 5)
@@ -45,19 +36,21 @@ int main(int ac, char **av)
 	
 	ft_parser(&a, ac, av);
 	i = 0;
-	ft_initiator(&a);
+
 	while (i < a.n_of_philo)
 	{
-		ft_init_philo(&a, i);
-		pthread_create(&thread[i], NULL, ft_threader, &a.philo[i]);
+		init_philo(&a, i);
+		pthread_create(&thread[i], NULL, ft_life, &a.dude[i]);
 		i = i + 2;
 		if (i >= a.n_of_philo && i % 2 == 0)
 		{
 			i = 1;
-			usleep(250);
+			usleep(500);
 		}
+		i++;
 	}
-	while (!a.deadphilo)
+	ft_gettime_init(&a);
+	while (!a.dead)
 		ft_healthcheck(&a);
 	i = 0;
 	while (i < a.n_of_philo)

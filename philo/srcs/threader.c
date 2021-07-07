@@ -24,16 +24,17 @@ void	ft_actionlist(t_a *a, t_philo *philo)
 	philo->last_meal = ft_gettime_sincestart(a);
 	ft_dialogue(a, philo, "is eating");
 	ft_waitfor(a, a->t_to_eat);
+	ft_dialogue(a, philo, "is done eating");
 	pthread_mutex_unlock(philo->left_frk);
 	pthread_mutex_unlock(philo->right_frk);
 	pthread_mutex_unlock(philo->eating);
 	ft_dialogue(a, philo, "is sleeping");
 	ft_waitfor(a, a->t_to_sleep);
 	ft_dialogue(a, philo, "is thinking");
-	ft_waitfor(a, a->t_to_sleep);
 	philo->cycles++;
-	//penser a proteger ca
+	pthread_mutex_lock(&a->m_stop);
 	philo->rip = a->deadphilo;
+	pthread_mutex_unlock(&a->m_stop);
 }
 
 void	*ft_threader(void *arg)
@@ -47,5 +48,39 @@ void	*ft_threader(void *arg)
 	philo->rip = 0;
 	while (!philo->rip && (philo->cycles < a->n_meals || a->limitmeal == 0))
 		ft_actionlist(a, philo);
+	if (a->deadphilo == 0 || a->deadphilo == 2)
+	{
+		ft_dialogue(a, philo, "IS DONE WITH THIS WILL DO BETTER THINGS WITH HIS LIFE");
+		a->deadphilo = 2;
+	}
 	return (NULL);
+}
+
+void	ft_healthcheck(t_a *a)
+{
+	int	now;
+	int	datelastmeal;
+	int	i;
+
+	i = -1;
+	now = ft_gettime_sincestart(a);
+	while (++i < a->n_of_philo)
+	{
+		pthread_mutex_lock(&a->m_stop);
+		datelastmeal = a->philo[i].last_meal;
+		pthread_mutex_unlock(&a->m_stop);
+		if (now - datelastmeal > a->t_to_die)
+		{
+			pthread_mutex_lock(&a->m_write);
+			printf("%dms %d is dead\n", ft_gettime_sincestart(a), i + 1);
+			pthread_mutex_unlock(&a->m_write);
+			pthread_mutex_lock(&a->m_stop);
+			/*if (a->deadphilo == 2)
+				a->deadphilo = 3;*/
+			if (a->deadphilo == 0)
+				a->deadphilo = 1;
+			pthread_mutex_unlock(&a->m_stop);
+			return ;
+		}
+	}
 }
