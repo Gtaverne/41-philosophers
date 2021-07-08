@@ -6,17 +6,18 @@ void	ft_sanitycheck(t_a *a)
 		ft_cleanexit(a, "Error: too many philosophers\n");
 	if (a->n_of_philo < 1 || a->t_to_die < 1 || a->t_to_eat < 1 \
 	|| a->t_to_sleep < 1 || (a->n_meals < 1 && a->limitmeal == 1))
-		ft_cleanexit(a, "Error: check arguments\n");
+		a->exit = 1;
 }
 
 void	ft_parser(t_a *a, int ac, char **av)
 {
 	if (ac < 5)
 	{
-		printf("Il manque des arguments :\n- N of philo\n\
+		a->exit = 1;
+		ft_cleanexit(a, "Il manque des arguments :\n- N of philo\n\
 - Time to die\n- Time to eat\n- Time to sleep\n- Time each \
 philosopher must eat [option]\n");
-		exit(1);
+		return ;
 	}
 	a->n_of_philo = ft_atoi(av[1], a);
 	a->t_to_die = ft_atoi(av[2], a);

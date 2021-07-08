@@ -5,6 +5,8 @@ void	ft_cleanexit(t_a *a, char *str)
 	int	i;
 
 	i = 0;
+	a->n_of_philo = -1;
+	a->deadphilo = 0;
 	printf("Exit : %s\n", str);
 	a->exit = 1;
 }
@@ -53,7 +55,11 @@ int	ft_atoi(const char *nptr, t_a *a)
 		if (nptr[i] >= '0' && nptr[i] <= '9')
 			r = r * 10 + nptr[i] - '0';
 		else
+		{
 			ft_cleanexit(a, "Arguments non numeriques");
+			printf("  Correct %s\n", nptr);
+			return (0);
+		}
 		i++;
 	}
 	if (r >= 3600000)
