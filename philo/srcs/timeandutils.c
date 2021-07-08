@@ -51,8 +51,8 @@ void	ft_waitfor(t_a *a, int n_ms)
 
 int	ft_atoi(const char *nptr, t_a *a)
 {
-	int		i;
-	long int		r;
+	int			i;
+	long int	r;
 
 	i = 0;
 	r = 0;
