@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 		ft_init_philo(&a, i);
 		pthread_create(&thread[i], NULL, ft_threader, &a.philo[i]);
 		i += 2;
-		usleep(1);
+		// usleep(1);
 		if (i >= a.n_of_philo && i % 2 == 0)
 		{
 			i = 1;
