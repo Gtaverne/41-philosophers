@@ -8,8 +8,6 @@
 # include <pthread.h>
 # include <string.h>
 
-# define VERBOSE 1
-
 typedef struct s_philo {
 	int				id;
 	int				last_meal;
@@ -31,6 +29,7 @@ typedef struct s_a {
 	int					limitmeal;
 	int					deadphilo;
 	long unsigned int	start_date;
+	int					exit;
 	t_philo				philo[200];
 	pthread_mutex_t		m_stop;
 	pthread_mutex_t		m_write;

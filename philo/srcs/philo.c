@@ -33,7 +33,7 @@ philosopher must eat [option]\n");
 		a->n_meals = -1;
 	}
 	if (ac > 6)
-		ft_cleanexit(a, ": too many arguments");
+		ft_cleanexit(a, " too many arguments");
 	ft_sanitycheck(a);
 }
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	ft_parser(&a, ac, av);
 	i = 0;
 	ft_initiator(&a);
-	while (i < a.n_of_philo)
+	while (i < a.n_of_philo && !a.exit)
 	{
 		ft_init_philo(&a, i);
 		pthread_create(&thread[i], NULL, ft_threader, &a.philo[i]);
@@ -57,11 +57,10 @@ int	main(int ac, char **av)
 			usleep(300);
 		}
 	}
-	while (!a.deadphilo)
+	while (!a.deadphilo && !a.exit)
 		ft_healthcheck(&a);
 	i = 0;
 	while (i < a.n_of_philo)
 		pthread_join(thread[i++], NULL);
-	ft_cleanexit(&a, "end");
 	return (0);
 }

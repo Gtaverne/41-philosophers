@@ -5,16 +5,8 @@ void	ft_cleanexit(t_a *a, char *str)
 	int	i;
 
 	i = 0;
-	printf("\nExit : %s\n", str);
-	if (str[0] == 'e' && str[1] == 'n' && str[2] == 'd' && VERBOSE)
-	{
-		while (i < a->n_of_philo)
-		{
-			printf("Philosopher %d ate %d meals\n", i + 1, a->philo[i].cycles);
-			i++;
-		}
-	}
-	exit(0);
+	printf("Exit : %s\n", str);
+	a->exit = 1;
 }
 
 void	ft_gettime_init(t_a *a)

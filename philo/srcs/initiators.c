@@ -48,4 +48,5 @@ void	ft_init_philo(t_a *a, int i)
 	a->philo[i].cycles = 0;
 	a->philo[i].last_meal = 0;
 	a->philo[i].a_dress = (void *)a;
+	a->exit = 0;
 }
